@@ -1,7 +1,7 @@
 program sumValues
 	num fVar, sVar, result; 
 	{
-	/*Este é um programa de soma*/
+	/*Este e um programa de soma*/
 	fVar = 2;
 	sVar = 2;
 	sVar = 341526345126412.22;
