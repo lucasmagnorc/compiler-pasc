@@ -1,4 +1,5 @@
 from tokens import token
+from symbolTable import symbolTable
 
 def openFile(nameFile):
 	file = open(nameFile, 'r')
@@ -6,7 +7,7 @@ def openFile(nameFile):
 
 openFile("pasC1.txt")
 
-tokenTeste = token("EOF", "EOF", 0, 21)
+ts = symbolTable()
 
-print(str(tokenTeste))
+print(str(ts))
 
