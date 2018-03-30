@@ -32,60 +32,61 @@ def switch_demo(current):
                 break
             elif current.isdigit():
                 lexem += current
-                state = 30
+                state = 13
                 break
             elif current.isalpha():
                 lexem += current
-                state = 33
+                state = 16
                 break
             elif current == '=':
                 state = 2
                 break
             elif current == '!':
-                state = 5
+                state = 3
                 break
             elif current == '>':
-                state = 7
+                state = 4
                 break
             elif current == '<':
-                state = 10
+                state = 5
                 break
             elif current == '+':
-                state = 13
-                break
+                state = 1
+                return token("OP_AD", "+", row, column)
             elif current == '-':
-                state = 14
-                break
+                state = 1
+                return token("OP_MIN", "-", row, column)
             elif current == "*":
-                state = 15
-                break
+                state = 1
+                return token("OP_MUL", "*", row, column)
             elif current == ';':
-                state = 16
-                break
+                state = 1
+                return token("SMB_SEM", ";", row, column)
             elif current == ',':
-                state = 17
-                break
+                state = 1
+                return token("SMB_COM", ",", row, column)
             elif current == '(':
-                state = 18
-                break
+                state = 1
+                return token("SMB_OPA", "(", row, column)
             elif current == ')':
-                state = 19
-                break
+                state = 1
+                return token("SMB_OPA", ")", row, column)
             elif current == '{':
-                state = 20
-                break
+                state = 1
+                return token("SMB_CBC", "{", row, column)
             elif current == '}':
-                state = 21
-                break
+                state = 1
+                return token("SMB_CBC", "}", row, column)
             elif current == "'":
                 lexem += current
-                state = 22
+                state = 6
                 break
             elif current == '"':
-                state = 24
+                lexem += current
+                state = 8
                 break
             elif current == '/':
-                state = 26
+                state = 9
                 break
             else:
                 state = 1
@@ -94,116 +95,42 @@ def switch_demo(current):
 
         if state == 2:
             if current == '=':
-                state = 3
-                break
+                state = 1
+                return token("OP_EQ", "==", row, column)
             else:
                 state = 1
                 return token("OP_ASS", "=", row, column)
 
-        # Estado final '=='
         if state == 3:
-            state = 1
-            return token("OP_EQ", "==", row, column)
-
-        if state == 5:
             if current == '=':
-                state = 6
-                break
+                state = 1
+                return token("OP_NE", "!=", row, column)
             else:
                 state = 1
                 print("Unknown character: [" + str(current) + "]", str(row), str(column))
                 break
 
-        # Estado final '!='
+        if state == 4:
+            if current == '=':
+                state = 1
+                return token("OP_GE", ">=", row, column)
+            else:
+                state = 1
+                return token("OP_GT", ">", row, column)
+
+        if state == 5:
+            if current == '=':
+                state = 1
+                return token("OP_LE", "<=", row, column)
+            else:
+                state = 1
+                return token("OP_LT", "<", row, column)
+
+
         if state == 6:
-            state = 1
-            return token("OP_NE", "!=", row, column)
-
-        if state == 7:
-            if current == '=':
-                state = 8
-                break
-            else:
-                state = 9
-                break
-
-        # Estado final '>='
-        if state == 8:
-            state = 1
-            return token("OP_GE", ">=", row, column)
-
-        # Estado final '>'
-        if state == 9:
-            state = 1
-            return token("OP_GT", ">", row, column)
-
-        if state == 10:
-            if current == '=':
-                state = 11
-                break
-            else:
-                state = 12
-                break
-
-        # Estado final '<='
-        if state == 11:
-            state = 1
-            return token("OP_LE", "<=", row, column)
-
-        # Estado final '<'
-        if state == 12:
-            state = 1
-            return token("OP_LT", "<", row, column)
-
-        # Estado final '+'
-        if state == 13:
-            state = 1
-            return token("OP_AD", "+", row, column)
-
-        # Estado final '-'
-        if state == 14:
-            state = 1
-            return token("OP_MIN", "-", row, column)
-
-        # Estado final '*'
-        if state == 15:
-            state = 1
-            return token("OP_MUL", "*", row, column)
-
-        # Estado final ';'
-        if state == 16:
-            state = 1
-            return token("SMB_SEM", ";", row, column)
-
-        # Estado final ','
-        if state == 17:
-            state = 1
-            return token("SMB_COM", ",", row, column)
-
-        # Estado final '('
-        if state == 18:
-            state = 1
-            return token("SMB_OPA", "(", row, column)
-
-        # Estado final ')'
-        if state == 19:
-            state = 1
-            return token("SMB_OPA", ")", row, column)
-
-        # Estado final '{'
-        if state == 20:
-            state = 1
-            return token("SMB_CBC", "{", row, column)
-
-        # Estado final '}'
-        if state == 21:
-            state = 1
-            return token("SMB_CBC", "}", row, column)
-
-        if state == 22:
             if current.isalpha:
                 lexem += current
-                state = 23
+                state = 7
                 break
             else:
                 state = 1
@@ -211,7 +138,7 @@ def switch_demo(current):
                 break
 
         # Estado final char
-        if state == 23:
+        if state == 7:
             if current == "'":
                 lexem += current
                 state = 1
@@ -222,7 +149,7 @@ def switch_demo(current):
                 break
 
         # Estado final para string
-        if state == 24:
+        if state == 8:
             if current == '"':
                 lexem += current
                 state = 1
@@ -231,52 +158,52 @@ def switch_demo(current):
                 return tokenHelper
             else:
                 lexem += current
-                state = 24
+                state = 8
                 break
 
-        if state == 26:
+        if state == 9:
             if current == '/':
-                state = 27
+                state = 10
                 break
             elif current == '*':
-                state = 28
+                state = 11
                 break
             else:
                 state = 1
                 return token("OP_DIV", "/", row, column)
 
         # Estado final para comentário //
-        if state == 27:
+        if state == 10:
             if current == '\n':
                 state = 1
                 break
 
-        if state == 28:
+        if state == 11:
             if current == '*':
-                state = 29
+                state = 12
                 break
             else:
-                state = 28;
+                state = 11;
                 break
 
         # Estado final para comentário /* */
-        if state == 29:
+        if state == 12:
             if current == '/':
                 state = 1
                 break
             else:
-                state = 28
+                state = 11
                 break
 
         # Estado final para digito
-        if state == 30:
+        if state == 13:
             if current.isdigit():
                 lexem += current
-                state = 30
+                state = 13
                 break
             elif current == '.':
                 lexem += current
-                state = 31
+                state = 14
                 break
             else:
                 state = 1
@@ -284,10 +211,10 @@ def switch_demo(current):
                 lexem = ''
                 return tokenHelper
 
-        if state == 31:
+        if state == 14:
             if current.isdigit():
                 lexem += current
-                state = 32
+                state = 15
                 break
             else:
                 state = 1
@@ -296,21 +223,22 @@ def switch_demo(current):
                 break
 
         # Estado final para número decimal
-        if state == 32:
+        if state == 15:
             if current.isdigit():
                 lexem += current
-                state = 32
+                state = 15
                 break
             else:
                 state = 1
                 tokenHelper = token("CON_NUM", lexem, row, column)
                 lexem = ''
                 return tokenHelper
+   
         # Estado final para Letras
-        if state == 33:
+        if state == 16:
             if current.isalpha() or current.isdigit():
                 lexem += current
-                state = 33
+                state = 16
                 break
             else:
                 state = 1
@@ -323,6 +251,13 @@ textArq = openFile("pasC1.txt")
 for line in textArq:
     i = 0
     while i < len(line):
+        if line[i] == '\t':
+            column +=3
+        elif line[i] == '\n' or line[i] == '\r':
+            row += 1
+            column = 0
+        else:
+            column += 1
         tokenHelper = switch_demo(line[i])
         if tokenHelper != None:
             if tokenHelper.getTag() == "ID":
@@ -334,4 +269,4 @@ for line in textArq:
                 print(tokenHelper)
         else:
             i += 1
-print(token("EOF", "EOF", row, column))
+print(token("EOF", "EOF", row, column+1))
