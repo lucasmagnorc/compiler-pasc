@@ -174,9 +174,11 @@ def switch_demo(current):
 
         # Estado final para comentário //
         if state == 10:
-            if current == '\n':
-                state = 1
+            if current != '\n':
+                state = 10
                 break
+            else:
+                state = 1
 
         if state == 11:
             if current == '*':

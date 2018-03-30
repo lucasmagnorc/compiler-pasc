@@ -1,4 +1,4 @@
-programn sumValues
+program sumValues
 	num fVar, sVar, result; 
 	{
 	/*Este e um programa de soma*/
