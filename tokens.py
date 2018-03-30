@@ -10,7 +10,7 @@ class token(object):
         self.column = column
         
     def getTag(self):
-        return self.tag
+        return str(self.tag)
     def setTag(self, tag):
         self.tag = tag
     
