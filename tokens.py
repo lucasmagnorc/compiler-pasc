@@ -30,4 +30,4 @@ class token(object):
         self.column = column
 
     def __str__(self):
-        return "<"+str(self.tag)+", \""+str(self.value)+"\">" 
+        return "<"+str(self.tag)+", \""+str(self.value)+"\">\tRow: "+str(self.row)+"\tColumn:"+str(self.column)

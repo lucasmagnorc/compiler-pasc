@@ -1,6 +1,7 @@
 class symbolTable(object):
     symbolTable = []
 
+    # Método construtor
     def __init__(self):
         self.symbolTable.append(["KW","program",0,0])
         self.symbolTable.append(["KW","if",0,0])
@@ -13,10 +14,12 @@ class symbolTable(object):
         self.symbolTable.append(["KW","not",0,0])
         self.symbolTable.append(["KW","or",0,0])
         self.symbolTable.append(["KW","and",0,0])
-        
+
+    # Método para adicionar um símbolo na tabela    
     def addSymbolTable(self, word, row, column):
         self.symbolTable.append(["ID", word, row, column])
 
+    # Método para retornar a tabela de símbolos
     def __str__(self):
         string = ""
         for i in range(0,len(self.symbolTable)):
