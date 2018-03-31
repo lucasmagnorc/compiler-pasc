@@ -138,7 +138,9 @@ def switch_demo(current):
         if state == 7:
             if current == "'":
                 state = 1
-                return token("CON_CHAR", lexem, row, column)
+                tokenHelper = token("CON_CHAR", lexem, row, column)
+                lexem = ''
+                return tokenHelper
             else:
                 state = 1
                 return ErrorMessage("LEXIC ERROR", "Expecting character", row, column)
@@ -154,15 +156,6 @@ def switch_demo(current):
                 lexem += current
                 state = 8
                 break
-
-        '''if state == 8:
-            if current == '"':
-                state = 1
-                break
-            else:
-                lexem += current
-                state = 17
-                break'''
 
         if state == 9:
             if current == '/':
@@ -195,6 +188,9 @@ def switch_demo(current):
         if state == 12:
             if current == '/':
                 state = 1
+                break
+            elif current == '*':
+                state = 12
                 break
             else:
                 state = 11
@@ -237,7 +233,7 @@ def switch_demo(current):
                 tokenHelper = token("CON_NUM", lexem, row, column)
                 lexem = ''
                 return tokenHelper
-   
+
         # Estado final para Letras
         if state == 16:
             if current.isalpha() or current.isdigit():
@@ -249,15 +245,6 @@ def switch_demo(current):
                 tokenHelper = token("ID", lexem, row, column)
                 lexem = ''
                 return tokenHelper
-
-        ''' if state == 17:
-            if current != '"':
-                lexem += current
-                state = 17
-            else:
-                state = 1
-                tokenHelper = token("LIT", lexem, row, column)
-                return tokenHelper ... '''
 
 
 textArq = openFile("pasC1.txt")
@@ -274,9 +261,11 @@ for line in textArq:
         else:
             column += 1
         tokenHelper = switch_demo(line[i])
+
         if tokenHelper != None:
             if tokenHelper.getTag() == "ID":
                 print(Ts.getToken(tokenHelper))
+                Ts.addSymbolTable(tokenHelper)
             elif tokenHelper.getTag() in tokensTReturn:
                 print(tokenHelper)
             elif tokenHelper.getTag() in errorsTReturn:
@@ -287,3 +276,5 @@ for line in textArq:
         else:
             i += 1
 print(token("EOF", "EOF", row, column+1))
+print("\nTABELA DE SIMBOLOS")
+print(Ts)

@@ -20,6 +20,9 @@ class symbolTable(object):
 
     # Método para adicionar um símbolo na tabela
     def addSymbolTable(self, newToken):
+        for tsToken in self.symbolTable:
+            if newToken.getValue() == tsToken.getValue():
+                return
         self.symbolTable.append(newToken)
 
     # Método para retornar se um token existe
@@ -34,6 +37,6 @@ class symbolTable(object):
         string = ""
         for tsToken in self.symbolTable:
             string += "Token: <" + tsToken.getTag(
-            ) + ", \"" + tsToken.getValue() + "\">\tRow: " + tsToken.getRow(
-            ) + "\tColumn: " + tsToken.getColumn() + "\n"
+            ) + ", \"" + tsToken.getValue() + "\">\tRow: " + str(tsToken.getRow(
+            )) + "\tColumn: " + str(tsToken.getColumn()) + "\n"
         return string
