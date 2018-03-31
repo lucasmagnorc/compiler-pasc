@@ -1,5 +1,6 @@
 from tokens import token
 from symbolTable import symbolTable
+from ErrorMessage import ErrorMessage
 
 Ts = symbolTable()
 row = 0
@@ -70,19 +71,17 @@ def switch_demo(current):
                 return token("SMB_OPA", "(", row, column)
             elif current == ')':
                 state = 1
-                return token("SMB_OPA", ")", row, column)
+                return token("SMB_CPA", ")", row, column)
             elif current == '{':
                 state = 1
-                return token("SMB_CBC", "{", row, column)
+                return token("SMB_OBC", "{", row, column)
             elif current == '}':
                 state = 1
                 return token("SMB_CBC", "}", row, column)
             elif current == "'":
-                lexem += current
                 state = 6
                 break
             elif current == '"':
-                lexem += current
                 state = 8
                 break
             elif current == '/':
@@ -90,7 +89,7 @@ def switch_demo(current):
                 break
             else:
                 state = 1
-                print("Unknown character: [" + str(current) + "]", str(row), str(column))
+                return ErrorMessage("LEXIC ERROR", "Unknown character", row, column)
                 break
 
         if state == 2:
@@ -107,8 +106,7 @@ def switch_demo(current):
                 return token("OP_NE", "!=", row, column)
             else:
                 state = 1
-                print("Unknown character: [" + str(current) + "]", str(row), str(column))
-                break
+                return ErrorMessage("LEXIC ERROR", "incomplete token", row, column)
 
         if state == 4:
             if current == '=':
@@ -134,24 +132,20 @@ def switch_demo(current):
                 break
             else:
                 state = 1
-                print("Unknown character: [" + str(current) + "]", str(row), str(column))
-                break
+                return ErrorMessage("LEXIC ERROR", "Expecting character", row, column)
 
         # Estado final char
         if state == 7:
             if current == "'":
-                lexem += current
                 state = 1
                 return token("CON_CHAR", lexem, row, column)
             else:
                 state = 1
-                print("Unknown character: [" + str(current) + "]", str(row), str(column))
-                break
+                return ErrorMessage("LEXIC ERROR", "Expecting character", row, column)
 
         # Estado final para string
         if state == 8:
             if current == '"':
-                lexem += current
                 state = 1
                 tokenHelper = token("LIT", lexem, row, column)
                 lexem = ''
@@ -160,6 +154,15 @@ def switch_demo(current):
                 lexem += current
                 state = 8
                 break
+
+        '''if state == 8:
+            if current == '"':
+                state = 1
+                break
+            else:
+                lexem += current
+                state = 17
+                break'''
 
         if state == 9:
             if current == '/':
@@ -185,7 +188,7 @@ def switch_demo(current):
                 state = 12
                 break
             else:
-                state = 11;
+                state = 11
                 break
 
         # Estado final para comentário /* */
@@ -221,8 +224,7 @@ def switch_demo(current):
             else:
                 state = 1
                 lexem = ''
-                print("Unknown character: [" + str(current) + "]", str(row), str(column))
-                break
+                return ErrorMessage("LEXIC ERROR", "", row, column)
 
         # Estado final para número decimal
         if state == 15:
@@ -248,8 +250,19 @@ def switch_demo(current):
                 lexem = ''
                 return tokenHelper
 
+        ''' if state == 17:
+            if current != '"':
+                lexem += current
+                state = 17
+            else:
+                state = 1
+                tokenHelper = token("LIT", lexem, row, column)
+                return tokenHelper ... '''
+
 
 textArq = openFile("pasC1.txt")
+tokensTReturn=["CON_NUM","OP_GT","OP_LT","OP_ASS"]
+errorsTReturn=["LEXIC_ERROR"]
 for line in textArq:
     i = 0
     while i < len(line):
@@ -264,7 +277,9 @@ for line in textArq:
         if tokenHelper != None:
             if tokenHelper.getTag() == "ID":
                 print(Ts.getToken(tokenHelper))
-            elif tokenHelper.getTag() == "CON_NUM":
+            elif tokenHelper.getTag() in tokensTReturn:
+                print(tokenHelper)
+            elif tokenHelper.getTag() in errorsTReturn:
                 print(tokenHelper)
             else:
                 i += 1

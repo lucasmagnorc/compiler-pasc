@@ -1,11 +1,12 @@
-program sumValues
-	num fVar, sVar, result; 
+prog.ram sumValues
+	num fVar, sVar, result;
 	{
-	/*Este e um programa de soma*/
-	//bfrhadubfd
-	fVar = 2;
-	sVar = 2;
+	/*Este e um pro
+	*gra
+	*ma de soma*/
+	fVar = 2.;
+	sVar @ = 3.14;
 	sVar = 341526345126412.22;
 	result = fVar + sVar;
-	write("result should be printed here");
+	write("oi");
 	}
