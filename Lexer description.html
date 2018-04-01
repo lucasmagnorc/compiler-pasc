@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.0.2.1 (Windows)"/>
+	<meta name="created" content="2018-04-01T15:48:20.057000000"/>
+	<meta name="changed" content="2018-04-01T17:10:07.301000000"/>
+	<style type="text/css">
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 115% }
+		a:link { so-language: zxx }
+	</style>
+</head>
+<body lang="pt-BR" dir="ltr">
+<p align="center" style="margin-bottom: 0cm; line-height: 100%"><b>An&aacute;lise
+L&eacute;xica e Tabela de S&iacute;mbolos</b></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><b>Descri&ccedil;&atilde;o
+do trabalho </b>
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Implementar
+um analisador l&eacute;xico para a linguagem PasC cuja descri&ccedil;&atilde;o
+encontra-se nas p&aacute;ginas 3 e 4. 
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Seu
+analisador l&eacute;xico dever&aacute; ser implementado com o aux&iacute;lio
+de um aut&ocirc;mato finito determin&iacute;stico. Ele dever&aacute;
+reconhecer um lexema e retornar, a cada chamada, um objeto da classe
+Token, representando o token reconhecido de acordo com o lexema
+encontrado. 
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Para
+facilitar a implementa&ccedil;&atilde;o, uma Tabela de S&iacute;mbolos
+(TS) dever&aacute; ser usada. Essa tabela conter&aacute;,
+inicialmente, <b>todas as palavras reservadas</b> da linguagem. &Agrave;
+medida que novos tokens forem sendo reconhecidos, esses dever&atilde;o
+ser consultados na TS antes de serem cadastrados e retornados.
+Somente palavras reservadas e identificadores ser&atilde;o
+cadastrados na TS. N&atilde;o &eacute; permitido o cadastro de um
+mesmo token mais de uma vez na TS.</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Resumindo,
+o Analisador L&eacute;xico dever&aacute; imprimir a lista de todos os
+tokens reconhecidos, assim como mostrar o que est&aacute; cadastrado
+na Tabela de S&iacute;mbolos. Na impress&atilde;o dos tokens, dever&aacute;
+aparecer a tupla &lt;nome, lexema&gt; assim como linha e coluna do
+token.</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Al&eacute;m
+de reconhecer os tokens da linguagem, seu analisador l&eacute;xico
+dever&aacute; detectar poss&iacute;veis erros e report&aacute;-los ao
+usu&aacute;rio. O programa dever&aacute; informar o erro e o local
+onde ocorreu (linha e coluna), lembrando que em an&aacute;lise l&eacute;xica
+tem-se 3 tipos de erros: caracteres desconhecidos (n&atilde;o
+esperados ou inv&aacute;lidos), string n&atilde;o-fechada antes de
+quebra de linha e coment&aacute;rio n&atilde;o-fechado antes do fim
+de arquivo. 
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Espa&ccedil;os
+em branco, tabula&ccedil;&otilde;es, quebras de linhas e coment&aacute;rios
+n&atilde;o s&atilde;o tokens, ou seja, devem ser
+descartados/ignorados pelo referido analisador.</p>
+<p align="justify" style="margin-bottom: 0cm; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm; line-height: 100%">
+Na gram&aacute;tica do PasC, os terminais de um lexema, bem como as
+palavras reservadas, est&atilde;o entre aspas duplas para
+destac&aacute;-los, ou seja, <b>as aspas n&atilde;o s&atilde;o
+tokens</b>.</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Faculdade:	</b><span style="font-weight: normal">Centro
+universit&aacute;rio de Belo Horizonte (UNIBH) &ndash; 2018</span></p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Professor:	</b><span style="font-weight: normal">Gustavo</span></p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Autores</b>:
+	Lucas Magno &ndash; RA &ndash; e-mail 
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">		Reubert
+Barbosa &ndash; 11517644 &ndash; reubert-unibh@outlook.com</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Linguagem
+de programa&ccedil;&atilde;o utilizada</b>: Python</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">O
+analisador l&eacute;xico cont&eacute;m 4 classes, sendo:
+<b>ErrorMessage, InternalFunction, SymbolTable, Tokens.</b></p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Cont&eacute;m <b>6</b> arquivos de testes na linguagem <b>PasC</b>.</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Detalhamento
+de classes:</b></p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>ErrorMessage</b></p>
+</ul>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Esta classe recebe um objeto do tipo Error contendo os seguintes
+atributos: tag, message, row, column. Em seu corpo est&atilde;o os
+m&eacute;todos getters and setters, assim como seu construtor e uma
+fun&ccedil;&atilde;o &lsquo;__str__&rsquo;.</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Sempre que s&atilde;o detectados erros l&eacute;xicos, s&atilde;o
+instanciados novos objetos do tipo ErrorMessage com seus respectivos
+valores.</p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Atributos</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Tag: recebe o tipo de erro. Ex: (l&eacute;xico, sint&aacute;tico).</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Message: recebe a mensagem do erro. Ex: (caractere desconhecido,
+	caractere inv&aacute;lido).</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Row: recebe a linha daquele erro.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Column: recebe a coluna que se situa o erro.</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Fun&ccedil;&otilde;es</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Getters and Setters: s&atilde;o fun&ccedil;&otilde;es fundamentais
+	para a inst&acirc;ncia dos atributos e para a recupera&ccedil;&atilde;o
+	do mesmo.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Constructor: fun&ccedil;&atilde;o que monta determinado erro.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	&lsquo;<span style="font-weight: normal">__str__&rsquo; tem como
+	principal objetivo nos retornar uma string concatenada com os
+	atributos daquele erro instanciado </span><span style="font-weight: normal">para
+	que possa ser &lsquo;printado&rsquo; o erro para o usu&aacute;rio.</span></p>
+</ol>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Tokens</b></p>
+</ul>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Esta classe recebe um objeto do tipo Token contendo os seguintes
+atributos: tag, value, row, column. Em seu corpo est&atilde;o os
+m&eacute;todos getters and setters, assim como seu construtor e uma
+fun&ccedil;&atilde;o &lsquo;__str__&rsquo;.</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Sempre que s&atilde;o detectados novos tokens na linguagem, s&atilde;o
+instanciados novos objetos do tipo Token com seus respectivos
+valores.</p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Atributos</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Tag: recebe o tipo de token. Ex: (CON_NUM, ID, LIT, etc).</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Value: recebe o valor do token. Ex: (&ldquo;123&rdquo;, &lsquo;c&rsquo;,
+	&lsquo;sVar&rsquo;, etc).</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Row: recebe a linha daquele token.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Column: recebe a coluna que se situa o token.</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Fun&ccedil;&otilde;es</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Getters and Setters: s&atilde;o fun&ccedil;&otilde;es fundamentais
+	para a inst&acirc;ncia dos atributos e para a recupera&ccedil;&atilde;o
+	do mesmo.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Constructor: fun&ccedil;&atilde;o que monta determinado erro.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	&lsquo;__str__&rsquo; tem como principal objetivo nos retornar uma
+	string concatenada com os atributos daquele token instanciado para
+	que possa ser &lsquo;printado&rsquo; para o usu&aacute;rio.</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>SymbolTable</b></p>
+</ul>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Esta classe &eacute; onde se situa toda a tabela de s&iacute;mbolos.
+Ela &eacute; respons&aacute;vel por guardar todas palavras-chave da
+linguagem PasC. Ela recebe a importa&ccedil;&atilde;o da classe
+Tokens.</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Nela temos: a vari&aacute;vel: symbolTable, e as fun&ccedil;&otilde;es:
+__init__, addSymbolTable, getToken, __str__</p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>V&aacute;riavel</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	symbolTable: v&aacute;riavel do tipo array, respons&aacute;vel por
+	receber todos as palavras-chave da linguagem PasC assim como os ID&rsquo;s
+	identificados ao decorrer da leitura do c&oacute;digo.</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Fun&ccedil;&otilde;es</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	__init__: Fun&ccedil;&atilde;o respons&aacute;vel por iniciar as
+	palavras-chave da linguagem PasC, instanciando-as na symbolTable no
+	momento de execu&ccedil;&atilde;o.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	addSymbolTable: Fun&ccedil;&atilde;o respons&aacute;vel por
+	adicionar os s&iacute;mbolos detectados na execu&ccedil;&atilde;o do
+	programa na symbolTable. Ela percorre todos s&iacute;mbolos dentro
+	da symbolTable, verificando se aquele s&iacute;mbolo que deseja
+	adicionar j&aacute; &eacute; existente, sen&atilde;o for existente
+	ela o insere.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	getToken: Fun&ccedil;&atilde;o respons&aacute;vel pela compara&ccedil;&atilde;o
+	dos tokens encontrados. Temos aqui dois tipos de tokens que v&atilde;o
+	ser inseridos na symbolTable(tabela de s&iacute;mbolos), sendo
+	palavras-chave da linguagem (KW) e as palavras detectadas no momento
+	de execu&ccedil;&atilde;o do c&oacute;digo (ID). No momento de
+	execu&ccedil;&atilde;o, essa fun&ccedil;&atilde;o h&aacute; de
+	comparar se aquele token que ela est&aacute; recebendo &eacute; um
+	ID ou um KW, ent&atilde;o ela percorre toda symbolTable comparando
+	se aquele token &eacute; um KW (onde todos s&atilde;o previamente
+	instanciados), caso n&atilde;o seja um KW por indu&ccedil;&atilde;o
+	sabemos que &eacute; um ID, retornando o token j&aacute;
+	identificado.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	__str__: fun&ccedil;&atilde;o respons&aacute;vel por imprimir o
+	token situado na symbolTable concatenado com seus atributos.</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	InternalFunction</p>
+</ul>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Esta classe &eacute; a respons&aacute;vel por dar in&iacute;cio a
+todo processo de reconhecimento l&eacute;xico. Ela importa todas
+outras classes previamente citadas.</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+Temos nela algumas vari&aacute;veis globais como: Ts (recebe a
+inst&acirc;ncia de symbolTable criada na classe SymbolTable),  row
+(linha), column (coluna), lexem (onde v&atilde;o ser montados os
+tokens), i ().</p>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	<b>Fun&ccedil;&otilde;es</b></p>
+</ul>
+<ol>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	openFile: Respons&aacute;vel por abrir o documento que queremos ler
+	e que cont&eacute;m a linguagem PasC escrita. Recebe o nome do
+	arquivo. Gera erro de entrada e saida sen&atilde;o conseguir ler
+	determinado arquivo.</p>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	structureOptions: Respons&aacute;vel por detectar o caractere
+	recebido e a partir daquele momento fazer a itera&ccedil;&atilde;o
+	do aut&ocirc;mato aplicando as regras para detec&ccedil;&atilde;o do
+	mesmo. Exemplo: ele recebe o seguinte caractere: &lsquo;*&rsquo;,
+	ent&atilde;o ele vai para o passo que corresponde e detecta esse
+	caractere como OP_MUL (operador de multiplica&ccedil;&atilde;o) e
+	retorna assim o token correspondente. Assim &eacute; feito com todos
+	outros detectados: OP_*, SMB_*, LIT, ID, KW, CON_*. Recebe um
+	caracter por itera&ccedil;&atilde;o. Retorna Token ou Error (caso
+	haja algum).</p>
+</ol>
+<ul>
+	<li/>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Temos a itera&ccedil;&atilde;o respons&aacute;vel pela leitura de
+	cada caractere no final do corpo do arquivo, l&aacute; &eacute;
+	feito um for (la&ccedil;o) que percorre linha por linha do arquivo
+	previamente aberto, dentro dele temos um loop infinito (while) que
+	percorre cada caractere daquela linha, passando para a fun&ccedil;&atilde;o
+	structureOptions para que sejam identificados os tokens, ao retornar
+	um token, temos uma vari&aacute;vel tokenHelper que o recebe e
+	imprime-o, se o token for um ID, adicionamos ele na symbolTable.
+	Temos tamb&eacute;m uma verifica&ccedil;&atilde;o para imprimir de
+	Errors. Temos a soma do &lsquo;i&rsquo; do for de 1 em 1.  O loop
+	infinito (while) s&oacute; termina quando &eacute; encontrado o
+	EOF(token que sinaliza end of file(final de arquivo)). 
+	</p>
+	<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	Resumindo, existe um la&ccedil;o para ler cada linha do arquivo e
+	sucessivamente cada caractere, passando para fun&ccedil;&atilde;o
+	structureOptions cada caractere detectado, para que seja tomado as
+	medidas cab&iacute;veis de acordo com as regras do aut&ocirc;mato da
+	linguagem e retornado um token, ap&oacute;s isso imprimimos o token
+	e somamos 1 ao &lsquo;i&rsquo; (vari&aacute;vel de itera&ccedil;&atilde;o
+	do la&ccedil;o) para que esse la&ccedil;o s&oacute; tenha fim quando
+	chegarmos ao final do arquivo.</p>
+</ul>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+</body>
+</html>

@@ -314,7 +314,7 @@ textArq = openFile("pasC1.txt")
 for line in textArq:
     i = 0
     
-    # Loop quer percorre caractere por caractere da linha 
+    # Loop que percorre caractere por caractere da linha 
     while i < len(line):
         
         # Verifica se o caractere é um tab e soma 3 a coluna
