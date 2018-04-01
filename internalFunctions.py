@@ -308,7 +308,7 @@ def structureOptions(current):
                 return tokenHelper
 
 
-textArq = openFile("pasC1.txt")
+textArq = openFile("averageWrong.txt")
 
 # Loop que percorre linha por linha do arquivo
 for line in textArq:

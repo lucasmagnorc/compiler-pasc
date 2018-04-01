@@ -1,0 +1,14 @@
+/*
+* Este e um programa de
+* media entre 3 valores
+*/
+program comparison
+	num value1, value2, value3 result;
+	{
+	value1=5;
+	value2=15;
+	value3 = 25;
+
+	result = (value1+value2+value3)/3;
+	write(result);
+	}

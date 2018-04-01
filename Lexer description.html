@@ -5,7 +5,7 @@
 	<title></title>
 	<meta name="generator" content="LibreOffice 6.0.2.1 (Windows)"/>
 	<meta name="created" content="2018-04-01T15:48:20.057000000"/>
-	<meta name="changed" content="2018-04-01T17:10:07.301000000"/>
+	<meta name="changed" content="2018-04-01T17:17:00.226000000"/>
 	<style type="text/css">
 		@page { margin: 2cm }
 		p { margin-bottom: 0.25cm; line-height: 115% }
@@ -19,9 +19,7 @@ L&eacute;xica e Tabela de S&iacute;mbolos</b></p>
 do trabalho </b>
 </p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%">Implementar
-um analisador l&eacute;xico para a linguagem PasC cuja descri&ccedil;&atilde;o
-encontra-se nas p&aacute;ginas 3 e 4. 
-</p>
+um analisador l&eacute;xico para a linguagem PasC.</p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%">Seu
 analisador l&eacute;xico dever&aacute; ser implementado com o aux&iacute;lio
 de um aut&ocirc;mato finito determin&iacute;stico. Ele dever&aacute;
@@ -66,14 +64,20 @@ tokens</b>.</p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
 
 </p>
-<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Faculdade:	</b><span style="font-weight: normal">Centro
-universit&aacute;rio de Belo Horizonte (UNIBH) &ndash; 2018</span></p>
-<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Professor:	</b><span style="font-weight: normal">Gustavo</span></p>
-<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Autores</b>:
-	Lucas Magno &ndash; RA &ndash; e-mail 
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Faculdade:
+</b><span style="font-weight: normal">Centro universit&aacute;rio de
+Belo Horizonte (UNIBH) &ndash; 2018</span></p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Professor:
+</b><span style="font-weight: normal">Gustavo </span><span style="font-weight: normal">Fernandes</span><span style="font-weight: normal">
+&ndash; </span><span style="font-weight: normal"><a href="mailto:gustavo.fernandes@prof.unibh.br">gustavo.fernandes@prof.unibh.br</a>
+</span><span style="font-weight: normal"> </span>
 </p>
-<p align="justify" style="margin-bottom: 0cm; line-height: 100%">		Reubert
-Barbosa &ndash; 11517644 &ndash; reubert-unibh@outlook.com</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Autores</b>:
+Lucas Magno &ndash; RA &ndash; <a href="mailto:lucasmagnorc@gmail.com">lucasmagnorc@gmail.com</a>
+</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">Reubert
+Barbosa &ndash; 11517644 &ndash; <a href="mailto:reubert-unibh@outlook.com">reubert-unibh@outlook.com</a>
+</p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Linguagem
 de programa&ccedil;&atilde;o utilizada</b>: Python</p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
@@ -84,8 +88,7 @@ analisador l&eacute;xico cont&eacute;m 4 classes, sendo:
 <b>ErrorMessage, InternalFunction, SymbolTable, Tokens.</b></p>
 <p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
 Cont&eacute;m <b>6</b> arquivos de testes na linguagem <b>PasC</b>.</p>
-<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
-<br/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
 
 </p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><b>Detalhamento
@@ -142,11 +145,10 @@ valores.</p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%">
 	&lsquo;<span style="font-weight: normal">__str__&rsquo; tem como
 	principal objetivo nos retornar uma string concatenada com os
-	atributos daquele erro instanciado </span><span style="font-weight: normal">para
-	que possa ser &lsquo;printado&rsquo; o erro para o usu&aacute;rio.</span></p>
+	atributos daquele erro instanciado para que possa ser &lsquo;printado&rsquo;
+	o erro para o usu&aacute;rio.</span></p>
 </ol>
-<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
-<br/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
 
 </p>
 <ul>
@@ -198,10 +200,11 @@ valores.</p>
 <p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
 	Constructor: fun&ccedil;&atilde;o que monta determinado erro.</p>
 	<li/>
-<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
-	&lsquo;__str__&rsquo; tem como principal objetivo nos retornar uma
-	string concatenada com os atributos daquele token instanciado para
-	que possa ser &lsquo;printado&rsquo; para o usu&aacute;rio.</p>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%">
+	&lsquo;<span style="font-weight: normal">__str__&rsquo; tem como
+	principal objetivo nos retornar uma string concatenada com os
+	atributos daquele token instanciado para que possa ser &lsquo;printado&rsquo;
+	para o usu&aacute;rio.</span></p>
 </ol>
 <ul>
 	<li/>
@@ -277,7 +280,7 @@ todo processo de reconhecimento l&eacute;xico. Ela importa todas
 outras classes previamente citadas.</p>
 <p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
 Temos nela algumas vari&aacute;veis globais como: Ts (recebe a
-inst&acirc;ncia de symbolTable criada na classe SymbolTable),  row
+inst&acirc;ncia de symbolTable criada na classe SymbolTable), row
 (linha), column (coluna), lexem (onde v&atilde;o ser montados os
 tokens), i ().</p>
 <ul>
@@ -317,7 +320,7 @@ tokens), i ().</p>
 	um token, temos uma vari&aacute;vel tokenHelper que o recebe e
 	imprime-o, se o token for um ID, adicionamos ele na symbolTable.
 	Temos tamb&eacute;m uma verifica&ccedil;&atilde;o para imprimir de
-	Errors. Temos a soma do &lsquo;i&rsquo; do for de 1 em 1.  O loop
+	Errors. Temos a soma do &lsquo;i&rsquo; do for de 1 em 1. O loop
 	infinito (while) s&oacute; termina quando &eacute; encontrado o
 	EOF(token que sinaliza end of file(final de arquivo)). 
 	</p>
@@ -331,12 +334,10 @@ tokens), i ().</p>
 	do la&ccedil;o) para que esse la&ccedil;o s&oacute; tenha fim quando
 	chegarmos ao final do arquivo.</p>
 </ul>
-<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
-<br/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
 
 </p>
-<p align="justify" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
-<br/>
+<p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>
 
 </p>
 <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br/>

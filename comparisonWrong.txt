@@ -1,0 +1,19 @@
+/*Este e um programa de
+* comparacao de valores
+*/
+program comparison
+	num fCompare, sCompare, result;
+	{
+	fCompare = 3.33.;
+	sCompare = 4.55;
+	if(fCompare == sCompare){
+	result = fCompare + sCompare;
+	write("iguais!");
+@
+}else{
+	result = fCompare - sCompare;
+	write("diferentes!");
+}
+	!
+	write(result);
+	}
