@@ -3,7 +3,7 @@ prog.ram sumValues
 	{
 	/*Este e um pro
 	*gra
-	*ma de soma*/
+	ma de soma*/
 	fVar = 2.;
 	sVar @ = 3.14;
 	sVar = 341526345126412.22;
