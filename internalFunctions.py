@@ -202,6 +202,8 @@ def structureOptions(current):
                 tokenHelper = token("LIT", lexem, row, column)
                 lexem = ''
                 return tokenHelper
+            elif current == '\n':
+                return ErrorMessage("LEXIC ERROR", "Expecting character", row, column)
             else:
                 lexem += current
                 state = 8
@@ -228,10 +230,10 @@ def structureOptions(current):
         if state == 11:
             if current == '*':
                 state = 12
-                break
+                return None
             else:
                 state = 11
-                break
+                return None
 
         if state == 12:
             if current == '/':
@@ -239,10 +241,10 @@ def structureOptions(current):
                 break
             elif current == '*':
                 state = 12
-                break
+                return None
             else:
                 state = 11
-                break
+                return None
 
         if state == 13:
             if current.isdigit():
@@ -308,24 +310,24 @@ def structureOptions(current):
                 return tokenHelper
 
 
-textArq = openFile("averageWrong.txt")
+textArq = openFile("CodesPasC/averageWrong.txt")
+tokenHelper = ''
 
 # Loop que percorre linha por linha do arquivo
 for line in textArq:
     i = 0
-    
-    # Loop que percorre caractere por caractere da linha 
+    # Loop que percorre caractere por caractere da linha
     while i < len(line):
-        
+
         # Verifica se o caractere é um tab e soma 3 a coluna
         if line[i] == '\t':
             column +=3
-        
+
         # Verifica se o caractere é uma quebra de linha e soma 1 a linha e zera o valor da coluna
         elif line[i] == '\n' or line[i] == '\r':
             row += 1
             column = 0
-       
+
         # Adiciona mais 1 a coluna
         else:
             column += 1
@@ -339,11 +341,11 @@ for line in textArq:
             if tokenHelper.getTag() == "ID":
                 print(Ts.getToken(tokenHelper))
                 Ts.addSymbolTable(tokenHelper)
-            
+
             # Verifica se o token tem um erro léxico e exibe ele
             elif tokenHelper.getTag() == "LEXIC_ERROR":
                 print(tokenHelper)
-            
+
             # Se não entrar nas outras condições apenas exibe
             else:
                 i += 1
@@ -351,7 +353,13 @@ for line in textArq:
         else:
             i += 1
 
+# Verifica se teve o último token, caso não, retorna erro (Resolvendo problema de comentário não fechando antes do EOF)
+if tokenHelper == None:
+    print(ErrorMessage("LEXIC ERROR", "Expecting character", row, column))
+
 # Exibe o token de final de arquivo
 print(token("EOF", "EOF", row, column+1))
+
+# Exibindo a tabela de símbolos
 #print("\nTABELA DE SIMBOLOS")
 #print(Ts)
