@@ -4,8 +4,8 @@ from ErrorMessage import ErrorMessage
 
 # Variáveis globais (tabela de símbolos, linha, coluna, estado, lexema e contador)
 Ts = symbolTable()
-row = 0
-column = 0
+row = 1
+column = 1
 state = 1
 lexem = ""
 i = 0
@@ -169,6 +169,7 @@ def structureOptions(current):
             else:
                 state = 1
                 i -= 1
+                column -= 1
                 return token("OP_LT", "<", row, column)
 
         if state == 6:
@@ -274,8 +275,8 @@ def structureOptions(current):
             # Retornando Token de um número decimal
             else:
                 state = 1
-                i -= 2
-                column -= 2
+                i -= 1
+                column -= 1
                 lexem = lexem.replace('.','')
                 tokenHelper = token("CON_NUM", lexem, row, column)
                 lexem = ''
@@ -305,12 +306,13 @@ def structureOptions(current):
             # Retornando Token de uma variável
             else:
                 state = 1
+                column -= 1
                 tokenHelper = token("ID", lexem, row, column)
                 lexem = ''
                 return tokenHelper
 
 
-textArq = openFile("CodesPasC/averageWrong.txt")
+textArq = openFile("CodesPasC/programaMarcao.txt")
 tokenHelper = ''
 
 # Loop que percorre linha por linha do arquivo
@@ -318,7 +320,7 @@ for line in textArq:
     i = 0
     # Loop que percorre caractere por caractere da linha
     while i < len(line):
-
+        
         # Verifica se o caractere é um tab e soma 3 a coluna
         if line[i] == '\t':
             column +=3
@@ -326,7 +328,7 @@ for line in textArq:
         # Verifica se o caractere é uma quebra de linha e soma 1 a linha e zera o valor da coluna
         elif line[i] == '\n' or line[i] == '\r':
             row += 1
-            column = 0
+            column = 1
 
         # Adiciona mais 1 a coluna
         else:

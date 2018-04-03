@@ -29,7 +29,7 @@ class symbolTable(object):
     def getToken(self, tokenAux):
         for tsToken in self.symbolTable:
             if tokenAux.getValue() == tsToken.getValue():
-                return tsToken
+                return token(tokenAux.getTag(), tokenAux.getValue(), tokenAux.getRow(), tokenAux.getColumn())
         return tokenAux
 
     # Método para retornar a tabela de símbolos
