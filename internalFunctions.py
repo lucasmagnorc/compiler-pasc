@@ -312,7 +312,7 @@ def structureOptions(current):
                 return tokenHelper
 
 
-textArq = openFile("CodesPasC/programaMarcao.txt")
+textArq = openFile("CodesPasC/sumValuesWrong.txt")
 tokenHelper = ''
 
 # Loop que percorre linha por linha do arquivo
